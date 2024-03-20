@@ -4,7 +4,18 @@ import List from "./components/List";
 import Form from "./components/Form";
 
 export default function App() {
-  const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState([
+    {
+      id: "2",
+      title: "청소하기",
+      completed: false,
+    },
+    {
+      id: "1",
+      title: "공부하기",
+      completed: true,
+    },
+  ]);
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -24,9 +35,9 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <div className="todoBlock">
-        <div className="title">할 일 목록</div>
+    <div className="flex items-start justify-center w-screen h-screen bg-blue-100">
+      <div className="w-full p-6 m-4 bg-white rounded shadow md:w-3/4 md:max-w-lg lg:w-3/4 lg:max-w-lg">
+        <div className="flex justify-between mb-r">할 일 목록</div>
 
         <List todoData={todoData} setTodoData={setTodoData} />
 
