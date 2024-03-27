@@ -10,7 +10,7 @@ const initialTodoData = localStorage.getItem("todoData")
 export default function App() {
   console.log("<App /> Component");
 
-  const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState([initialTodoData]);
   const [value, setValue] = useState("");
 
   const handleClick = useCallback(
@@ -54,7 +54,7 @@ export default function App() {
 
         <Lists
           handleClick={handleClick}
-          todoData={todoData}
+          todoData={initialTodoData}
           setTodoData={setTodoData}
         />
 

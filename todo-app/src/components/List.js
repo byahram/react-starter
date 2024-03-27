@@ -46,7 +46,7 @@ const List = React.memo(
     if (isEditing) {
       return (
         <div
-          className={`flex items-center justify-between w-full px-4 py-1 my-2 bg-gray-100 text-gray-600 bg-gray-100 border rounded`}
+          className={`flex items-center justify-between w-full px-4 py-1 my-2 bg-gray-100 text-gray-600 border rounded`}
         >
           <form onSubmit={handleSubmit}>
             <input
