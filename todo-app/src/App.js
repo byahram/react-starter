@@ -3,21 +3,14 @@ import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
+const initialTodoData = localStorage.getItem("todoData")
+  ? JSON.parse(localStorage.getItem("todoData"))
+  : [];
+
 export default function App() {
   console.log("<App /> Component");
 
-  const [todoData, setTodoData] = useState([
-    {
-      id: "2",
-      title: "청소하기",
-      completed: false,
-    },
-    {
-      id: "1",
-      title: "공부하기",
-      completed: true,
-    },
-  ]);
+  const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
 
   const handleClick = useCallback(
@@ -42,17 +35,19 @@ export default function App() {
 
     // 원래 있던 할 일에 새로운 할 일 더해주기
     setTodoData((prev) => [...prev, newTodo]);
+    localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
     setValue("");
   };
 
   const handleRemoveClick = () => {
     setTodoData([]);
+    localStorage.setItem("todoData", JSON.stringify([]));
   };
 
   return (
     <div className="flex items-start justify-center w-screen h-screen bg-blue-100">
       <div className="w-full p-6 m-4 bg-white rounded shadow md:w-3/4 md:max-w-lg lg:w-3/4 lg:max-w-lg">
-        <div className="flex justify-between mb-r">
+        <div className="flex justify-between mb-4 font-bold">
           <h1>할 일 목록</h1>
           <button onClick={handleRemoveClick}>Delete All</button>
         </div>

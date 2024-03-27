@@ -24,10 +24,54 @@ const List = React.memo(
         return data;
       });
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
+    };
+
+    const handleEditChange = (event) => {
+      setEditedTitle(event.target.value);
+    };
+
+    const handleSubmit = () => {
+      let newTodoData = todoData.map((data) => {
+        if (data.id === id) {
+          data.title = editedTitle;
+        }
+        return data;
+      });
+      setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
+      setIsEditing(false);
     };
 
     if (isEditing) {
-      return <div>editiong..</div>;
+      return (
+        <div
+          className={`flex items-center justify-between w-full px-4 py-1 my-2 bg-gray-100 text-gray-600 bg-gray-100 border rounded`}
+        >
+          <form onSubmit={handleSubmit}>
+            <input
+              value={editedTitle}
+              onChange={handleEditChange}
+              className="w-full px-3 py-2 mr-4 text-gray-500 rounded"
+            />
+          </form>
+          <div className="items-center">
+            <button
+              className="px-4 py-2 float-right"
+              onClick={() => setIsEditing(false)}
+            >
+              x
+            </button>
+            <button
+              className="px-4 py-2 float-right"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              save
+            </button>
+          </div>
+        </div>
+      );
     } else {
       return (
         <div
